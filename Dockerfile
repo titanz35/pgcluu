@@ -18,6 +18,6 @@ RUN dnf install -y \
     && make \
     && make install \
     && mkdir -p $PGCLUU_STATS_DIR $PGCLUU_REPORT_DIR
-ENTRYPOINT ["echo", "-e" ,"\"\\t Hit CTRL-\\ (SIGQUIT) to stop the collection and generate the report\"", ";", \
-           "pgcluu_collectd", "-i", "60", $PGCLUU_STATS_DIR, "-h", $POSTGRES_HOSTNAME, "-U", $POSTGRES_USERNAME, "-d", $POSTGRES_DB, ";", \
+ENTRYPOINT ["echo", "-e" ,"\"\\t Hit CTRL-\\ (SIGQUIT) to stop the collection and generate the report\"", "&&", \
+           "pgcluu_collectd", "-i", "60", $PGCLUU_STATS_DIR, "-h", $POSTGRES_HOSTNAME, "-U", $POSTGRES_USERNAME, "-d", $POSTGRES_DB, "&&", \
            "pgcluu", "-o", $PGCLUU_REPORT_DIR, $PGCLUU_STATS_DIR ]
